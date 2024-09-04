@@ -1,20 +1,20 @@
-import express from 'express';
-import { Request, Response } from 'express';
 import sequelize from './database/database';
+import app from './routers/routes';
 import Usuario from './database/models/Usuario';
-import dotenv from 'dotenv';
 
 const port = 3232;
-
-const app = express();
-
-app.get('/', (req: Request, res: Response) => {
-    return res.send('Hello, world!');
-});
 
 try {
     await sequelize.authenticate()
     await sequelize.sync({ force: true });
+
+    // Criação de um novo usuário
+    const novoUsuario = await Usuario.create({
+    cpf: '12345678901',
+    email: 'example@example.com',
+    nome: 'João da Silva',
+    telefone: '123456789'
+    });
 
 
     app.listen(port, () => {

@@ -14,7 +14,6 @@ class Usuario extends Model {
   email!: string;
 
   @Column
-  @NotNull
   nome!: string;
 
   @Column
