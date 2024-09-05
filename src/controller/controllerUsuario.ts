@@ -7,7 +7,14 @@ class UsuarioController{
         this.usuarioRepository = usuarioRepository;
     }
     async addUsuario(req:Request, res:Response){
-        return await this.usuarioRepository.addUsuario(req.body)
+        try{
+            const usuario = await this.usuarioRepository.addUsuario(req.body)
+            return res.status(201).json(usuario);
+        }catch(error){
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }  
+
     }
 }
 
