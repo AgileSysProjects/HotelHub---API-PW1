@@ -5,6 +5,7 @@ import sequelize from '../database';
   tableName: 'usuarios'
 })
 class Usuario extends Model {
+
   @PrimaryKey
   @Column
   cpf!: string;
