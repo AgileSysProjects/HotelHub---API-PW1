@@ -45,6 +45,17 @@ class UsuarioController {
             return res.status(500).json({ message: "Internal Server Error" });
         }
     }
+
+    async findUserByPk(req: Request, res:Response) {
+        try {
+            const { cpf } = req.params
+            const user = await this.usuarioRepository.findUserByPk(cpf);
+            return res.status(201).json(user);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
 }
 
 export default UsuarioController;

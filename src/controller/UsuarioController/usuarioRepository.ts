@@ -34,6 +34,16 @@ class UsuarioRepository {
             throw new Error('Erro ao remover usuário');
         }
     }
+
+    async findUserByPk(cpf:string):Promise<Usuario | null> { 
+        try {
+            const user:Usuario|null = await Usuario.findByPk(cpf);
+            return user;
+        } catch (error) {
+            console.error('Erro ao buscar usuário', error);
+            throw new Error('Erro ao buscar usuário');
+        }
+    }
 }
 
 export default UsuarioRepository;

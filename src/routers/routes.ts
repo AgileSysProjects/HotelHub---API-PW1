@@ -23,5 +23,9 @@ app.delete("/Usuario", async(req:Request, res:Response) => {
     await usuarioController.deleteUser(req, res);
 });
 
+app.get("/Usuario/:cpf", async(req:Request, res:Response) => {
+    await usuarioController.findUserByPk(req, res);
+});
+
 export default app
 
