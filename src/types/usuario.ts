@@ -1,7 +1,8 @@
 type Usuario = {
-    nome: string;
+    cpf: string;
     email: string;
-    senha: string;
+    nome: string;
+    telefone: string;
 }
 
 export default Usuario

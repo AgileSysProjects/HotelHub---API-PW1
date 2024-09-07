@@ -1,21 +1,14 @@
 import sequelize from './database/database';
 import app from './routers/routes';
-import Usuario from './database/models/Usuario';
 
 const port = 3232;
 
 try {
     await sequelize.authenticate()
-    await sequelize.sync({ force: true });
+    //Verifica conexão com o banco
 
-    // Criação de um novo usuário
-    const novoUsuario = await Usuario.create({
-    cpf: '12345678901',
-    email: 'example@example.com',
-    nome: 'João da Silva',
-    telefone: '123456789'
-    });
-
+    await sequelize.sync();
+    //Sincroniza o banco 
 
     app.listen(port, () => {
         console.table({

@@ -4,8 +4,8 @@ import sequelize from '../database';
 @Table({
   tableName: 'usuarios'
 })
-class Usuario extends Model {
-
+class Usuario extends Model<Usuario> {
+  
   @PrimaryKey
   @Column
   cpf!: string;

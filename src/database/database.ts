@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+import Usuario from "./models/Usuario";
 
 const sequelize = new Sequelize('main', 'admin', 'postgres', {
     host: 'localhost',
