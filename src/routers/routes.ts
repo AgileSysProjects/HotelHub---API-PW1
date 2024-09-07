@@ -19,5 +19,9 @@ app.get("/Usuario", async(req:Request, res:Response) => {
     await usuarioController.listAllUsers(req, res);
 });
 
+app.delete("/Usuario", async(req:Request, res:Response) => {
+    await usuarioController.deleteUser(req, res);
+});
+
 export default app
 

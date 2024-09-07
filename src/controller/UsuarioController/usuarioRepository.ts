@@ -21,6 +21,19 @@ class UsuarioRepository {
             throw new Error('Erro ao listar usuários');
         }
     }
+
+    async deleteUser(cpf: string):Promise<void> {
+        try {
+            await Usuario.destroy({
+                where:{
+                    cpf:cpf,
+                }
+            })
+        } catch (error) {
+            console.error('Erro ao remover usuário', error);
+            throw new Error('Erro ao remover usuário');
+        }
+    }
 }
 
 export default UsuarioRepository;

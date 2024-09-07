@@ -34,6 +34,17 @@ class UsuarioController {
             return res.status(500).json({ message: "Internal Server Error" });
         }
     }
+
+    async deleteUser(req:Request, res:Response) {
+        try {
+            const { cpf } = req.body
+            await this.usuarioRepository.deleteUser(cpf);
+            return res.status(201).json('Usuário removido!');
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
 }
 
 export default UsuarioController;
