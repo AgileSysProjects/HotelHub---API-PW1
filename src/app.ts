@@ -1,5 +1,5 @@
 import sequelize from './database/database';
-import app from './routers/routes';
+import app from './routers/config';
 
 const port = 3232;
 
