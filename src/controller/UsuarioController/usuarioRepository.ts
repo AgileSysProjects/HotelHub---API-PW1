@@ -1,5 +1,6 @@
-import { Sequelize, Model } from "sequelize";
+import { Sequelize, Model, UUID } from "sequelize";
 import Usuario from '../../database/models/Usuario.ts';
+import { UsuarioDTO } from "./UsuarioDTO.ts";
 
 class UsuarioRepository {
     constructor(private sequelize: Sequelize) {}
@@ -44,6 +45,22 @@ class UsuarioRepository {
             throw new Error('Erro ao buscar usuário');
         }
     }
+
+    async updateUser(cpf:string, user:Usuario|UsuarioDTO):Promise<unknown | void> {
+        try {
+            const newUser = await Usuario.update({
+                ...user
+            }, {
+                where:{
+                    cpf:cpf
+                }
+            })
+            return newUser;
+        } catch(error) {
+            console.error('Erro ao atualizar usuário', error);
+            throw new Error('Erro ao atualizar usuário');
+        }
+    } 
 }
 
 export default UsuarioRepository;

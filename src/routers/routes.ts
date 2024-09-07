@@ -27,5 +27,9 @@ app.get("/Usuario/:cpf", async(req:Request, res:Response) => {
     await usuarioController.findUserByPk(req, res);
 });
 
+app.patch("/Usuario", async(req:Request, res:Response) => {
+    await usuarioController.updateUser(req, res);
+});
+
 export default app
 

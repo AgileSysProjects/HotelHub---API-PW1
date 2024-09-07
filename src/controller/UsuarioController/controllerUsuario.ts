@@ -48,9 +48,21 @@ class UsuarioController {
 
     async findUserByPk(req: Request, res:Response) {
         try {
-            const { cpf } = req.params
+            const { cpf } = req.params;
             const user = await this.usuarioRepository.findUserByPk(cpf);
             return res.status(201).json(user);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+
+    async updateUser(req:Request, res:Response) {
+        try {
+            const usuarioData: UsuarioDTO = UsuarioSchema.parse(req.body);
+            const cpf = req.body.cpf;
+            const newUser = await this.usuarioRepository.updateUser(cpf, usuarioData);
+            return res.status(201).json(newUser);
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: "Internal Server Error" });
