@@ -1,7 +1,7 @@
 import sequelize from './database/database';
 import app from './routers/config';
 
-const port = 3232;
+const port = 3333;
 
 try {
     await sequelize.authenticate()
