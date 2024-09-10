@@ -30,6 +30,4 @@ class Reserva extends Model<Reserva> {
     quartoNumero!: number;
 }
 
-sequelize.addModels([Reserva]);
-
 export default Reserva;

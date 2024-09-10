@@ -24,6 +24,4 @@ class Quarto extends Model<Quarto>{
 
 }
 
-sequelize.addModels([Quarto]);
-
 export default Quarto;

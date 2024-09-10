@@ -21,6 +21,4 @@ class Usuario extends Model<Usuario> {
   telefone!: string;
 }
 
-sequelize.addModels([Usuario]);
-
 export default Usuario;

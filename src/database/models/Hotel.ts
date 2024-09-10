@@ -25,6 +25,4 @@ class Hotel extends Model<Hotel> {
     endereco!: string;
 }
 
-sequelize.addModels([Hotel]);
-
 export default Hotel;

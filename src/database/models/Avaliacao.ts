@@ -25,6 +25,4 @@ class Avaliacao extends Model<Avaliacao> {
     feedback!: string;
 }
 
-sequelize.addModels([Avaliacao]);
-
 export default Avaliacao;
