@@ -10,3 +10,4 @@ const UsuarioSchema = z.object({
 type UsuarioDTO = z.infer<typeof UsuarioSchema>;
 
 export { UsuarioDTO, UsuarioSchema };
+
