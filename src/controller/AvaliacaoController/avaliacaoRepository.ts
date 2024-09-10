@@ -23,11 +23,11 @@ class AvaliacaoRepository {
         }
     }
 
-    async deleteAvaliacao(id: string): Promise<void> {
+    async deleteAvaliacao(codigo: string): Promise<void> {
         try {
             await Avaliacao.destroy({
                 where: {
-                    id: id,
+                    codigo: codigo,
                 },
             });
         } catch (error) {
@@ -36,9 +36,9 @@ class AvaliacaoRepository {
         }
     }
 
-    async findAvaliacaoByPk(id: string): Promise<Avaliacao | null> {
+    async findAvaliacaoByPk(codigo: string): Promise<Avaliacao | null> {
         try {
-            const avaliacao = await Avaliacao.findByPk(id);
+            const avaliacao = await Avaliacao.findByPk(codigo);
             return avaliacao;
         } catch (error) {
             console.error('Erro ao buscar avaliação', error);
@@ -46,9 +46,9 @@ class AvaliacaoRepository {
         }
     }
 
-    async updateAvaliacao(id: string, avaliacao: AvaliacaoDTO): Promise<unknown | void> {
+    async updateAvaliacao(codigo: string, avaliacao: AvaliacaoDTO): Promise<unknown | void> {
         try {
-            const updatedAvaliacao = await Avaliacao.update({ ...avaliacao }, { where: { id: id } });
+            const updatedAvaliacao = await Avaliacao.update({ ...avaliacao }, { where: { codigo: codigo } });
             return updatedAvaliacao;
         } catch (error) {
             console.error('Erro ao atualizar avaliação', error);

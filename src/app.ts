@@ -7,9 +7,7 @@ try {
     await sequelize.authenticate()
     //Verifica conexão com o banco
 
-    await sequelize.sync({
-        force: true,
-    });
+    await sequelize.sync();
     //Sincroniza o banco 
 
     app.listen(port, () => {

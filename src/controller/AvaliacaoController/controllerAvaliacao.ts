@@ -37,9 +37,9 @@ class AvaliacaoController {
 
     async deleteAvaliacao(req: Request, res: Response) {
         try {
-            const { id } = req.body;
-            await this.avaliacaoRepository.deleteAvaliacao(id);
-            return res.status(200).json('Avaliação removida!');
+            const { codigo } = req.body;
+            await this.avaliacaoRepository.deleteAvaliacao(codigo);
+            return res.status(200).json('Avaliação removcodigoa!');
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: "Internal Server Error" });
@@ -48,8 +48,8 @@ class AvaliacaoController {
 
     async findAvaliacaoByPk(req: Request, res: Response) {
         try {
-            const { id } = req.params;
-            const avaliacao = await this.avaliacaoRepository.findAvaliacaoByPk(id);
+            const { codigo } = req.params;
+            const avaliacao = await this.avaliacaoRepository.findAvaliacaoByPk(codigo);
             return res.status(200).json(avaliacao);
         } catch (error) {
             console.error(error);
@@ -60,8 +60,8 @@ class AvaliacaoController {
     async updateAvaliacao(req: Request, res: Response) {
         try {
             const avaliacaoData: AvaliacaoDTO = AvaliacaoSchema.parse(req.body);
-            const id = req.body.id;
-            const updatedAvaliacao = await this.avaliacaoRepository.updateAvaliacao(id, avaliacaoData);
+            const codigo = req.body.codigo;
+            const updatedAvaliacao = await this.avaliacaoRepository.updateAvaliacao(codigo, avaliacaoData);
             return res.status(200).json(updatedAvaliacao);
         } catch (error) {
             console.error(error);

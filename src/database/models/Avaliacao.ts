@@ -8,13 +8,15 @@ import Hotel from "./Hotel";
 })
 class Avaliacao extends Model<Avaliacao> {
     @PrimaryKey
+    @Column
+    codigo!: string;
+
     @ForeignKey(
         () => Usuario
     )
     @Column
     usuarioCPF!: string;
 
-    @PrimaryKey
     @ForeignKey(
         () => Hotel
     )
