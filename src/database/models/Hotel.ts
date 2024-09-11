@@ -19,7 +19,7 @@ class Hotel extends Model<Hotel> {
     imagem!: string;
 
     @Column
-    classificao!: string;
+    classificacao!: string;
 
     @Column
     endereco!: string;
