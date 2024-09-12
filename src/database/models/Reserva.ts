@@ -1,5 +1,4 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey } from "sequelize-typescript";
-import sequelize from "../database";
 import Usuario from "./Usuario";
 import Quarto from "./Quarto";
 

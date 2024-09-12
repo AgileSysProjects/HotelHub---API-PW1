@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey } from "sequelize-typescript";
+import { Table, Column, Model, PrimaryKey, ForeignKey, DataType } from "sequelize-typescript";
 import sequelize from "../database";
 import Hotel from "./Hotel";
 
@@ -10,7 +10,10 @@ class Quarto extends Model<Quarto>{
     @Column
     numero!: number;
     
-    @Column
+    @Column({
+        type: DataType.DECIMAL(10, 2),
+        allowNull: false
+    })
     preco!: number;
 
     @Column
