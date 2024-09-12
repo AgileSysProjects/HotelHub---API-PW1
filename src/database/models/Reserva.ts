@@ -12,10 +12,10 @@ class Reserva extends Model<Reserva> {
     numero!: number;
 
     @Column
-    checkin!: Date;
+    checkin!: string;
 
     @Column
-    checkout!: Date;
+    checkout!: string;
 
     @ForeignKey(
         () => Usuario
