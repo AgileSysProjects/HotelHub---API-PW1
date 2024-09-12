@@ -14,7 +14,6 @@ class HotelController {
     async addHotel(req: Request, res: Response) {
         try {
             const hotelData: HotelDTO = HotelSchema.parse(req.body);
-            console.log(hotelData);
             const hotel = await this.hotelRepository.addHotel(hotelData);
             
             return res.status(201).json(hotel);

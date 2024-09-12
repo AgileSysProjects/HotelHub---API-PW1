@@ -24,6 +24,39 @@ class ReservaController {
             return res.status(500).json({ message: "Internal Server Error" });
         }
     }
+
+    async deleteReserva(req:Request, res:Response) {
+        try {
+            const { numero } = req.body
+            await this.reservaRepository.deleteReserva(numero);
+            return res.status(201).json('Reserva cancelada!');
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+
+    async listAllReservas(req:Request, res:Response) {
+        try {
+            const reservas = await this.reservaRepository.listAllReservas();
+            return res.status(201).json(reservas);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+
+    async findReservaByPk(req:Request, res:Response) {
+        try {
+            const { numero } = req.params;
+            const numeroReserva:number = Number(numero);
+            const reserva = await this.reservaRepository.findReservaByPk(numeroReserva);
+            return res.status(201).json(reserva);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
 }
 
 export default ReservaController;

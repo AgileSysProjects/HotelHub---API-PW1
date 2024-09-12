@@ -13,6 +13,42 @@ class ReservaRepository {
             throw new Error('Erro ao fazer reserva');
         }
     }
+
+    async deleteReserva(numero: number): Promise<void> {
+        try{
+
+        } catch(error) {
+            try {
+                await Reserva.destroy({
+                    where:{
+                        numero:numero,
+                    }
+                })
+            } catch (error) {
+                console.error('Erro ao remover usuário', error);
+                throw new Error('Erro ao remover usuário');
+            }
+        }
+    }
+
+    async listAllReservas(): Promise<Reserva[]> {
+        try {
+            return await Reserva.findAll();
+        } catch (error) {
+            console.error('Erro ao listar reservas', error);
+            throw new Error('Erro ao listar reservas');
+        }
+    }
+
+    async findReservaByPk(numero: number): Promise<Reserva | null> {
+        try {
+            const reserva: Reserva|null = await Reserva.findByPk(numero);
+            return reserva;
+        } catch (error) {
+            console.error('Erro ao buscar reserva', error);
+            throw new Error('Erro ao buscar reserva');
+        }
+    }
 }
 
 export default ReservaRepository;
