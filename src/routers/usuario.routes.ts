@@ -4,8 +4,7 @@ import { Application } from 'express';
 
 import app from './config';
 
-import usuarioController from '../controller/UsuarioController';
-
+import {usuarioController} from '../controller/UsuarioController/index';
 
 const userRoutes = (app: Application) => {
     app.get('/', (req: Request, res: Response) => {

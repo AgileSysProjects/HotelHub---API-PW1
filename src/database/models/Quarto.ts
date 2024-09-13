@@ -9,6 +9,13 @@ class Quarto extends Model<Quarto>{
     @PrimaryKey
     @Column
     numero!: number;
+
+    @PrimaryKey
+    @ForeignKey(
+        () => Hotel
+    )
+    @Column
+    hotelCNPJ!: string;
     
     @Column({
         type: DataType.DECIMAL(10, 2),
@@ -18,13 +25,6 @@ class Quarto extends Model<Quarto>{
 
     @Column
     tipo!: string;
-
-    @ForeignKey(
-        () => Hotel
-    )
-    @Column
-    hotelCNPJ!: string;
-
 }
 
 export default Quarto;

@@ -5,5 +5,5 @@ import UsuarioController from "./controllerUsuario";
 const usuarioRepository = new UsuarioRepository(sequelize);
 const usuarioController = new UsuarioController(usuarioRepository);
 
-export default usuarioController;
+export {usuarioController, usuarioRepository};
 

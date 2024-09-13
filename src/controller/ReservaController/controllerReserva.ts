@@ -2,15 +2,38 @@ import { Request, Response } from "express";
 import ReservaRepository from "./reservaRepository.ts";
 import { ReservaSchema, ReservaDTO } from "./ReservaDTO.ts";
 import { z } from "zod";
+import UsuarioRepository from "../UsuarioController/usuarioRepository.ts";
+import QuartoRepository from "../QuartoController/quartoRepository.ts";
+import { log } from "console";
+
 
 class ReservaController {
     reservaRepository: ReservaRepository;
+    usuarioRepository: UsuarioRepository;
+    quartoRepository: QuartoRepository;
 
-    constructor(reservaRepository: ReservaRepository) {
+    constructor(reservaRepository: ReservaRepository, usuarioRepository:UsuarioRepository, quartoRepository: QuartoRepository) {
         this.reservaRepository = reservaRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.quartoRepository = quartoRepository;
     }
 
     async addReserva(req: Request, res: Response) {
+        const cpf = req.body.usuarioCPF;
+        const userDate = await this.usuarioRepository.findUserByPk(cpf);
+
+        if(!userDate) {
+            return res.status(400).json("Usuário não encontrado");
+        }
+
+        const cnpj = req.body.hotelCNPJ;
+        const numero = req.body.quartoNumero;
+        const quartoDate = await this.quartoRepository.findRoomByPk(numero, cnpj);
+        
+        if(!quartoDate) {
+            return res.status(400).json("Quarto não encontrado");
+        }
+
         try {
             const reservaData: ReservaDTO = ReservaSchema.parse(req.body);
             const reserva = await this.reservaRepository.addReserva(reservaData);
