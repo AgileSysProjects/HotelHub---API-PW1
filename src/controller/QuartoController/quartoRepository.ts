@@ -40,15 +40,11 @@ class QuartoRepository {
 
     async findRoomByPk(numero:number, hotelCNPJ:string):Promise<Quarto | null> { 
         try {
-            const user: Quarto | null = await Quarto.findByPk({
-                numero: numero,
-                hotelCNPJ: hotelCNPJ
-              });
-              
-
-              console.log(numero, hotelCNPJ);
-
-            return user;
+            const quarto: Quarto | null = await Quarto.findOne({
+                where: { numero:numero
+                    , hotelCNPJ:hotelCNPJ}
+            });
+            return quarto;
         } catch (error) {
             console.error('Erro ao buscar quarto', error);
             throw new Error('Erro ao buscar quarto');

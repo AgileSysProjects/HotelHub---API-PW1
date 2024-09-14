@@ -1,7 +1,6 @@
 import { Sequelize, Model, UUID } from "sequelize";
 import Hotel from '../../database/models/Hotel.ts';
 import { HotelDTO } from "./HotelDTO.ts";
-import Usuario from "../../database/models/Usuario.ts";
 
 class HotelRepository {
     constructor(private sequelize: Sequelize) {}

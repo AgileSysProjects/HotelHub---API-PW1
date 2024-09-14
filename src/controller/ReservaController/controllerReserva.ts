@@ -4,18 +4,20 @@ import { ReservaSchema, ReservaDTO } from "./ReservaDTO.ts";
 import { z } from "zod";
 import UsuarioRepository from "../UsuarioController/usuarioRepository.ts";
 import QuartoRepository from "../QuartoController/quartoRepository.ts";
-import { log } from "console";
+import HotelRepository from "../HotelController/hotelRepository.ts";
 
 
 class ReservaController {
     reservaRepository: ReservaRepository;
     usuarioRepository: UsuarioRepository;
     quartoRepository: QuartoRepository;
+    hotelRepository: HotelRepository;
 
-    constructor(reservaRepository: ReservaRepository, usuarioRepository:UsuarioRepository, quartoRepository: QuartoRepository) {
+    constructor(reservaRepository: ReservaRepository, usuarioRepository:UsuarioRepository, quartoRepository: QuartoRepository, hotelRepository: HotelRepository) {
         this.reservaRepository = reservaRepository;
         this.usuarioRepository = usuarioRepository;
         this.quartoRepository = quartoRepository;
+        this.hotelRepository = hotelRepository;
     }
 
     async addReserva(req: Request, res: Response) {
@@ -26,8 +28,17 @@ class ReservaController {
             return res.status(400).json("Usuário não encontrado");
         }
 
+        console.log('hotelRepository:', this.hotelRepository);
+
         const cnpj = req.body.hotelCNPJ;
+        const hotelData = await this.hotelRepository.findHotelByPk(cnpj);
+
+        if(!hotelData) {
+            return res.status(400).json("Hotel não encontrado");
+        }
+
         const numero = req.body.quartoNumero;
+
         const quartoDate = await this.quartoRepository.findRoomByPk(numero, cnpj);
         
         if(!quartoDate) {
@@ -50,7 +61,7 @@ class ReservaController {
 
     async deleteReserva(req:Request, res:Response) {
         try {
-            const { numero } = req.body
+            const { numero } = req.body;
             await this.reservaRepository.deleteReserva(numero);
             return res.status(201).json('Reserva cancelada!');
         } catch (error) {
