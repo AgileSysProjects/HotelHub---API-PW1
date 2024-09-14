@@ -1,6 +1,7 @@
 import { Sequelize, Model, UUID } from "sequelize";
 import Quarto from '../../database/models/Quarto.ts';
 import { QuartoDTO } from "./QuartoDTO";
+import { number } from "zod";
 
 class QuartoRepository {
     constructor(private sequelize: Sequelize) {}
@@ -23,11 +24,12 @@ class QuartoRepository {
         }
     }
 
-    async deleteRoom(numero: number):Promise<void> {
+    async deleteRoom(numero: number, hotelCNPJ: string):Promise<void> {
         try {
             await Quarto.destroy({
                 where:{
                     numero:numero,
+                    hotelCNPJ:hotelCNPJ
                 }
             })
         } catch (error) {
@@ -36,23 +38,27 @@ class QuartoRepository {
         }
     }
 
-    async findUserByPk(numero:number):Promise<Quarto | null> { 
+    async findRoomByPk(numero:number, hotelCNPJ:string):Promise<Quarto | null> { 
         try {
-            const user:Quarto|null = await Quarto.findByPk(numero);
-            return user;
+            const quarto: Quarto | null = await Quarto.findOne({
+                where: { numero:numero
+                    , hotelCNPJ:hotelCNPJ}
+            });
+            return quarto;
         } catch (error) {
             console.error('Erro ao buscar quarto', error);
             throw new Error('Erro ao buscar quarto');
         }
     }
 
-    async updateRoom(numero:number, room:Quarto|QuartoDTO):Promise<unknown | void> {
+    async updateRoom(numero:number, hotelCNPJ:string, room:Quarto|QuartoDTO):Promise<unknown | void> {
         try {
             const newRoom = await Quarto.update({
                 ...room
             }, {
                 where:{
-                    numero:numero
+                    numero:numero,
+                    hotelCNPJ:hotelCNPJ
                 }
             })
             return newRoom;

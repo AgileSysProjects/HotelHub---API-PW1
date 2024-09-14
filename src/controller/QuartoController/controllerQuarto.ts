@@ -37,8 +37,8 @@ class QuartoController {
 
     async deleteRoom(req:Request, res:Response) {
         try {
-            const { numero } = req.body
-            await this.quartoRepository.deleteRoom(numero);
+            const { numero, hotelCNPJ } = req.body
+            await this.quartoRepository.deleteRoom(numero, hotelCNPJ);
             return res.status(201).json('Quarto removido!');
         } catch (error) {
             console.error(error);
@@ -48,11 +48,12 @@ class QuartoController {
 
     async findRoomByPk(req: Request, res: Response) {
         try {
-            const numero = parseInt(req.params.numero);
+            const numero = parseInt(req.body.numero);
             if (isNaN(numero)) {
                 return res.status(400).json({ message: "Número inválido" });
             }
-            const room = await this.quartoRepository.findUserByPk(numero);
+            const {hotelCNPJ} = req.body;
+            const room = await this.quartoRepository.findRoomByPk(numero, hotelCNPJ);
             return res.status(201).json(room);
         } catch (error) {
             console.error(error);
@@ -66,8 +67,9 @@ class QuartoController {
             if (isNaN(numero)) {
                 return res.status(400).json({ message: "Número inválido" });
             }
+            const {hotelCNPJ} = req.body;
             const roomData: QuartoDTO = QuartoSchema.parse(req.body);
-            const room = await this.quartoRepository.updateRoom(numero, roomData);
+            const room = await this.quartoRepository.updateRoom(numero, hotelCNPJ, roomData);
             return res.status(201).json(room);
         } catch (error) {
             console.error(error);
