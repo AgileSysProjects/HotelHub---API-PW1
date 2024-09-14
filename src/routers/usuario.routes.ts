@@ -1,6 +1,7 @@
 import express from 'express';
 import { Request, Response } from 'express';
 import { Application } from 'express';
+import authenticate from '../middleware/authenticate';
 
 import app from './config';
 
@@ -19,7 +20,7 @@ const userRoutes = (app: Application) => {
         await usuarioController.listAllUsers(req, res);
     });
 
-    app.delete("/Usuario", async(req:Request, res:Response) => {
+    app.delete("/Usuario", authenticate.handle, async(req:Request, res:Response) => {
         await usuarioController.deleteUser(req, res);
     });
 

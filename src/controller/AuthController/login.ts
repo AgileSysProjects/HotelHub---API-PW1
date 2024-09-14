@@ -2,8 +2,11 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Usuario from '../../database/models/Usuario.ts';
+import dotenv from 'dotenv'
 
-const secret = 'your_secret_key'; // Substitua por uma chave secreta segura
+dotenv.config();
+
+const secret = process.env.JWT_SECRET || 'default_secret_key';
 
 const login = async (req: Request, res: Response) => {
     const { cpf, password } = req.body;
@@ -16,7 +19,7 @@ const login = async (req: Request, res: Response) => {
         }
 
         const token = jwt.sign({ cpf: user.cpf }, secret, { expiresIn: '1h' });
-        res.setHeader('Authorization', Bearer ${token});
+        res.setHeader('Authorization', `Bearer ${token}`);
         res.json({ token });
     } catch (error) {
         res.status(500).json({ message: 'Erro ao fazer login.' });

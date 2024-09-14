@@ -1,7 +1,10 @@
 import sequelize from './database/database';
 import app from './routers/config';
+import dotenv from 'dotenv'
 
-const port = 3333;
+dotenv.config();
+
+const port = process.env.PORT;
 
 try {
     await sequelize.authenticate()

@@ -18,6 +18,9 @@ class Usuario extends Model<Usuario> {
 
   @Column
   telefone!: string;
+
+  @Column
+  password!:string;
 }
 
 export default Usuario;

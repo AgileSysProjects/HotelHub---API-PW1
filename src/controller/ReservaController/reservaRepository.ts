@@ -46,21 +46,7 @@ class ReservaRepository {
         }
     }
 
-    async updateReserva(numero: number, reserva: Reserva | ReservaDTO): Promise<unknown | null> {
-        try {
-            const newReserva = await Reserva.update({
-                ...reserva
-            }, {
-                where:{
-                    numero: numero,
-                }
-            })
-            return newReserva;
-        } catch(error) {
-            console.error('Erro ao atualizar reserva', error);
-            throw new Error('Erro ao atualizar reserva');
-        }
-    }
+    
 }
 
 export default ReservaRepository;

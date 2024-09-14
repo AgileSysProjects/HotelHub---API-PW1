@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import UsuarioRepository from "./usuarioRepository.ts";
 import { UsuarioSchema, UsuarioDTO } from "./UsuarioDTO.ts";
+import bcrypt from 'bcrypt';
 import { z } from "zod";
 
 class UsuarioController {
     usuarioRepository: UsuarioRepository;
+    private saltRounds: number = 10;
 
     constructor(usuarioRepository: UsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -13,7 +15,11 @@ class UsuarioController {
     async addUsuario(req: Request, res: Response) {
         try {
             const usuarioData: UsuarioDTO = UsuarioSchema.parse(req.body);
-            const usuario = await this.usuarioRepository.addUsuario(usuarioData);
+
+            const hashedPassword = await bcrypt.hash(usuarioData.password, this.saltRounds);
+            const usuarioComSenhaHasheada = { ...usuarioData, password: hashedPassword };
+            
+            const usuario = await this.usuarioRepository.addUsuario(usuarioComSenhaHasheada);
 
             return res.status(201).json(usuario);
         } catch (error) {

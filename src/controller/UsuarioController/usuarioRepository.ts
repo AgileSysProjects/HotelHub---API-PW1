@@ -45,6 +45,23 @@ class UsuarioRepository {
             throw new Error('Erro ao buscar usuário');
         }
     } 
+
+    async updateUser(cpf: string, usuario: Usuario | UsuarioDTO): Promise<unknown | null> {
+        try {
+            const newUser = await Usuario.update({
+                ...usuario
+            }, {
+                where:{
+                    cpf: cpf,
+                }
+            })
+            return newUser;
+        } catch(error) {
+            console.error('Erro ao atualizar usuário', error);
+            throw new Error('Erro ao atualizar usuário');
+        }
+    }
+    
 }
 
 export default UsuarioRepository;
