@@ -1,5 +1,6 @@
-import { Table, Column, Model, PrimaryKey } from "sequelize-typescript";
+import { Table, Column, Model, PrimaryKey, DataType } from "sequelize-typescript";
 import sequelize from "../database";
+import { DataTypes } from "sequelize";
 
 @Table ({
     tableName: "hoteis"
@@ -21,8 +22,12 @@ class Hotel extends Model<Hotel> {
     @Column
     classificacao!: string;
 
-    @Column
-    endereco!: string;
+    @Column({
+        type: DataTypes.GEOGRAPHY('POINT'),
+        allowNull: false,
+        field: 'geolocalizacao'
+      })
+      localizacao!: any;
 }
 
 export default Hotel;
