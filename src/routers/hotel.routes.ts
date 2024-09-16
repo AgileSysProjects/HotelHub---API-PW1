@@ -5,6 +5,7 @@ import { Application } from 'express';
 import app from './config';
 
 import hotelController from '../controller/HotelController';
+import authenticate from '../middleware/authenticate';
 
 
 const hotelRoutes = (app: Application) => {
@@ -16,7 +17,7 @@ const hotelRoutes = (app: Application) => {
         await hotelController.listAllHotels(req, res);
     });
 
-    app.delete("/Hotel", async(req:Request, res:Response) => {
+    app.delete("/Hotel", authenticate.handle ,async(req:Request, res:Response) => {
         await hotelController.deleteHotel(req, res);
     });
 
@@ -24,7 +25,7 @@ const hotelRoutes = (app: Application) => {
         await hotelController.findHotelByPk(req, res);
     });
 
-    app.patch("/Hotel", async(req:Request, res:Response) => {
+    app.patch("/Hotel", authenticate.handle ,async(req:Request, res:Response) => {
         await hotelController.updateHotel(req, res);
     });
 }
