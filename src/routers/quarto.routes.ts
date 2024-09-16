@@ -4,6 +4,7 @@ import { Application } from "express";
 import app from "./config";
 
 import quartoController from "../controller/QuartoController";
+import authenticate from "../middleware/authenticate";
 
 const quartoRoutes = (app: Application) => {
     app.get("/", (req: Request, res: Response) => {
@@ -18,7 +19,7 @@ const quartoRoutes = (app: Application) => {
         await quartoController.listAllRooms(req, res);
     });
 
-    app.delete("/Quarto", async (req: Request, res: Response) => {
+    app.delete("/Quarto", authenticate.handle ,async (req: Request, res: Response) => {
         await quartoController.deleteRoom(req, res);
     });
 
@@ -26,7 +27,7 @@ const quartoRoutes = (app: Application) => {
         await quartoController.findRoomByPk(req, res);
     });
 
-    app.patch("/Quarto", async (req: Request, res: Response) => {
+    app.patch("/Quarto", authenticate.handle ,async (req: Request, res: Response) => {
         await quartoController.updateRoom(req, res);
     });
 }
