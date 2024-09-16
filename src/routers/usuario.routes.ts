@@ -28,7 +28,7 @@ const userRoutes = (app: Application) => {
         await usuarioController.findUserByPk(req, res);
     });
 
-    app.patch("/Usuario", async(req:Request, res:Response) => {
+    app.patch("/Usuario", authenticate.handle, async(req:Request, res:Response) => {
         await usuarioController.updateUser(req, res);
     });
 }
