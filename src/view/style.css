@@ -1,0 +1,40 @@
+body {
+    background-image: url('./assets/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container-center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-custom {
+  width: 960px;
+  height: 540px;
+  max-width: 100%; /* Garantir responsividade em telas menores */
+  display: flex;
+  flex-direction: row;
+}
+
+.image-side {
+  width: 50%;
+  background-image: url('./assets/hotel2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.form-side {
+  width: 50%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+}
+.form-side form {
+  width: 100%;
+}

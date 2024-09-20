@@ -6,6 +6,7 @@ class UsuarioRepository {
     constructor(private sequelize: Sequelize) {}
 
     async addUsuario(usuario: Partial<Usuario>): Promise<Usuario> {
+        
         try {
             return await Usuario.create(usuario as Usuario);
         } catch (error) {

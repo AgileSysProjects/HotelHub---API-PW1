@@ -2,8 +2,6 @@ import express from 'express';
 import { Request, Response } from 'express';
 import { Application } from 'express';
 
-import app from './config';
-
 import hotelController from '../controller/HotelController';
 import authenticate from '../middleware/authenticate';
 
