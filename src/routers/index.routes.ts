@@ -5,13 +5,15 @@ import hotelRoutes from "./hotel.routes";
 import reservaRoutes from "./reserva.routes";
 import quartoRoutes from "./quarto.routes";
 import loginRoute from "./login.routes";
+import uploadRoute from "./upload.routes";
 
 const routes = (app:Application) => {
-    loginRoute(app)
+    loginRoute(app);
     userRoutes(app);
     hotelRoutes(app);
     reservaRoutes(app);
-    quartoRoutes(app)
+    quartoRoutes(app);
+    uploadRoute(app);
 }
 
 export default routes;
