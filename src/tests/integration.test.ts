@@ -173,7 +173,7 @@ describe('Testes de integração', () => {
             telefone: "(11)98765-4321",
             password: "Senha123"
         };
-
+        
         await expect(UsuarioSchema.parseAsync(exemploUsuario)).rejects.toThrow();
     });
 });
