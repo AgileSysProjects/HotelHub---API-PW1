@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { PostgreSqlContainer, StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 import { Sequelize } from "sequelize-typescript";
 

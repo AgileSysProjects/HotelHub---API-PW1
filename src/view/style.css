@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap');
+
 body {
     background-image: url('./assets/bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    font-family: "Montserrat", system-ui;
 }
 
 .container-center {
