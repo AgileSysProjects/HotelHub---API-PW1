@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import AvaliacaoRepository from "./avaliacaoRepository";
 import { AvaliacaoSchema, AvaliacaoDTO } from "./AvaliacaoDTO";
 import { z } from "zod";
+import Hotel from "../../database/models/Hotel";
+import Avaliacao from "../../database/models/Avaliacao";
 
 class AvaliacaoController {
     avaliacaoRepository: AvaliacaoRepository;
@@ -14,6 +16,13 @@ class AvaliacaoController {
         try {
             const avaliacaoData: AvaliacaoDTO = AvaliacaoSchema.parse(req.body);
             const avaliacao = await this.avaliacaoRepository.addAvaliacao(avaliacaoData);
+
+            const cnpjHotel = req.body.hotelCNPJ
+            const hotelVerify = await Hotel.findByPk(cnpjHotel);
+            
+            if (!hotelVerify) {
+                return res.status(404).json('Hotel não encontrado');
+            }
 
             return res.status(201).json(avaliacao);
         } catch (error) {
@@ -37,9 +46,16 @@ class AvaliacaoController {
 
     async deleteAvaliacao(req: Request, res: Response) {
         try {
-            const { codigo } = req.body;
+            const codigo  = req.body.codigo;
+            console.log(codigo);
+
+            const avaliacaoVerify = await Avaliacao.findByPk(codigo);
+            console.log(avaliacaoVerify);
+            if(!avaliacaoVerify) {
+                return res.status(404).json('Avaliação não encontrada')
+            }
             await this.avaliacaoRepository.deleteAvaliacao(codigo);
-            return res.status(200).json('Avaliação removcodigoa!');
+            return res.status(200).json('Avaliação removida!');
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: "Internal Server Error" });

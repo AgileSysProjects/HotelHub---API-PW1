@@ -1,7 +1,7 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey } from "sequelize-typescript";
-import sequelize from "../database";
 import Usuario from "./Usuario";
 import Hotel from "./Hotel";
+
 
 @Table({
     tableName: "avaliacoes"
@@ -9,8 +9,8 @@ import Hotel from "./Hotel";
 class Avaliacao extends Model<Avaliacao> {
     @PrimaryKey
     @Column
-    codigo!: string;
-
+    codigo!:string
+    
     @ForeignKey(
         () => Usuario
     )
