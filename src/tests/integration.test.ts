@@ -1,6 +1,7 @@
 /// <reference types="jest" />
 import { PostgreSqlContainer, StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 import { Sequelize } from "sequelize-typescript";
+import { expect } from '@jest/globals';
 
 import Avaliacao from "../database/models/Avaliacao";
 import Hotel from "../database/models/Hotel";

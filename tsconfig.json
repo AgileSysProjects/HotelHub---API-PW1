@@ -16,9 +16,9 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "types": [
+      "jest",
       "cypress",
       "bun-types",
-      "jest"
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
