@@ -19,12 +19,14 @@ class AvaliacaoController {
 
             const cnpjHotel = req.body.hotelCNPJ
             const hotelVerify = await Hotel.findByPk(cnpjHotel);
+            console.log(hotelVerify?.cnpj);
             
-            if (!hotelVerify) {
+            if (hotelVerify?.cnpj === undefined) {
                 return res.status(404).json('Hotel não encontrado');
             }
-
+            
             return res.status(201).json(avaliacao);
+            
         } catch (error) {
             if (error instanceof z.ZodError) {
                 return res.status(400).json({ message: error.errors });

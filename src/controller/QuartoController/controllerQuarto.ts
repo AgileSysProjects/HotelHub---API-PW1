@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import QuartoRepository from "./quartoRepository.ts";
 import { QuartoSchema, QuartoDTO } from "./QuartoDTO.ts";
 import { z } from "zod";
+import Hotel from "../../database/models/Hotel.ts";
+import { log } from "console";
 
 class QuartoController {
     quartoRepository: QuartoRepository;
@@ -13,6 +15,13 @@ class QuartoController {
     async addQuarto(req: Request, res: Response) {
         try {
             const quartoData: QuartoDTO = QuartoSchema.parse(req.body);
+
+            const cnpj = quartoData.hotelCNPJ;
+            const hotelVerify = await Hotel.findByPk(cnpj);
+            if(!hotelVerify) {
+                return res.status(404).json('Hotel não encontrado!')
+            }
+
             const quarto = await this.quartoRepository.addQuarto(quartoData);
 
             return res.status(201).json(quarto);

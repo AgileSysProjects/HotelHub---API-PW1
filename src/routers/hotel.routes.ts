@@ -7,7 +7,7 @@ import authenticate from '../middleware/authenticate';
 
 
 const hotelRoutes = (app: Application) => {
-    app.post("/Hotel", async(req: Request, res: Response) => {
+    app.post("/Hotel", authenticate.handle ,async(req: Request, res: Response) => {
         await hotelController.addHotel(req, res);
     });
 
